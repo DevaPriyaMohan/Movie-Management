@@ -1,0 +1,39 @@
+.board {
+  text-align: center;
+  margin: 20px auto;
+  max-width: 600px;
+  font-family: Arial, sans-serif;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background: #f2f2f2;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+input {
+  margin: 5px;
+  padding: 5px;
+}
+
+button {
+  margin: 5px;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+button:first-of-type {
+  background: orange;
+}
+
+button:last-of-type {
+  background: red;
+  color: white;
+}
