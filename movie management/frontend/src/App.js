@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { Contract,  BrowserProvider } from "ethers";
+import { contractAddress } from "./contract_address.json";
+import { abi } from "./abi.json";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -9,6 +12,14 @@ function App() {
     genre: "",
     rating: "",
   });
+
+ const provider = new BrowserProvider(window.ethereum)
+
+  async function connectMetaMask() {
+    const signer = await provider.getSigner()
+
+    alert(`Successfully Connected ${signer.address}`)
+  }
   const [editMovie, setEditMovie] = useState(null);
 
   const getMovies = async () => {
