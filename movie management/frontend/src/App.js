@@ -62,6 +62,7 @@ function App() {
       <h1>Movie Management</h1>
 
       <h2>Add Movie</h2>
+      <button onClick={connectMetaMask}>connect metamask</button>
       <input
         placeholder="Title"
         value={newMovie.title}
