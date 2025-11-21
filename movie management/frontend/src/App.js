@@ -59,10 +59,12 @@ function App() {
 
   return (
     <div style={{ textAlign: "center" }}>
-      <h1>Movie Management</h1>
-
+      <div style={{display:'flex',alignItems:'center'}}>
+      <h1 style={{ flex: 1, textAlign: 'center' }}>Movie Management</h1>
+      <button  style={{paddingRight:'20px'}} onClick={connectMetaMask}>connect metamask</button>
+      </div>
       <h2>Add Movie</h2>
-      <button onClick={connectMetaMask}>connect metamask</button>
+      
       <input
         placeholder="Title"
         value={newMovie.title}
