@@ -23,9 +23,11 @@ function App() {
   const [editMovie, setEditMovie] = useState(null);
 
   const getMovies = async () => {
-    let res = await fetch("http://localhost:5000/movies");
-    let data = await res.json();
-    setMovies(data);
+   const signer = await provider.getSigner()
+    const instance = new Contract(contractAddress, abi, signer)
+
+    const trx = await instance.getMovies(id)
+    console.log('Transaction Hash:', trx.hash)
   };
 
   useEffect(() => {
@@ -33,13 +35,11 @@ function App() {
   }, []);
 
   const addMovie = async () => {
-    await fetch("http://localhost:5000/movies", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newMovie),
-    });
-    setNewMovie({ title: "", director: "", releaseYear: "", genre: "", rating: "" });
-    getMovies();
+  const signer = await provider.getSigner()
+    const instance = new Contract(contract_Address, abi, signer)
+
+    const trx = await instance.addMovie(title,director,releaseYear,genre,rating)
+    console.log('Transaction Hash:', trx.hash)
   };
 
   const saveEdit = async (id) => {
