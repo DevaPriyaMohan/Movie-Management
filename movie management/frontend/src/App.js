@@ -24,7 +24,7 @@ function App() {
 
   const getMovies = async () => {
    const signer = await provider.getSigner()
-    const instance = new Contract(contractAddress, abi, signer)
+    const instance = new Contract(contract_Address, abi, signer)
 
     const trx = await instance.getMovies(id)
     console.log('Transaction Hash:', trx.hash)
