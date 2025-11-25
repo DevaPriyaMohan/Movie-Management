@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Contract,  BrowserProvider } from "ethers";
-import { contractAddress } from "./contract_address.json";
-import { abi } from "./abi.json";
+import Contract_Address  from "./contract_address.json";
+import abi from "./abi.json";
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [newMovie, setNewMovie] = useState({
+    id:0,
     title: "",
-    director: "",
     releaseYear: "",
     genre: "",
-    rating: "",
   });
 
  const provider = new BrowserProvider(window.ethereum)
 
   async function connectMetaMask() {
+    console.log(Contract_Address);
+    
     const signer = await provider.getSigner()
 
     alert(`Successfully Connected ${signer.address}`)
@@ -24,10 +25,10 @@ function App() {
 
   const getMovies = async () => {
    const signer = await provider.getSigner()
-    const instance = new Contract(contract_Address, abi, signer)
+    const instance = new Contract(Contract_Address.Contract_Address, abi.abi, signer)
 
-    const trx = await instance.getMovies(id)
-    console.log('Transaction Hash:', trx.hash)
+    // const trx = await instance.getMovies(id)
+    // console.log('Transaction Hash:', trx.hash)
   };
 
   useEffect(() => {
@@ -36,9 +37,11 @@ function App() {
 
   const addMovie = async () => {
   const signer = await provider.getSigner()
-    const instance = new Contract(contract_Address, abi, signer)
+  console.log(Contract_Address);
+  
+    const instance = new Contract(Contract_Address.Contract_Address, abi.abi, signer)
 
-    const trx = await instance.addMovie(title,director,releaseYear,genre,rating)
+    const trx = await instance.addMovie(newMovie.id,newMovie.title,newMovie.releaseYear,newMovie.genre)
     console.log('Transaction Hash:', trx.hash)
   };
 
@@ -65,16 +68,21 @@ function App() {
       </div>
       <h2>Add Movie</h2>
       
+        <input
+        placeholder="ID"
+        value={newMovie.id}
+        onChange={(e) => setNewMovie({ ...newMovie, id: e.target.value })}
+      />
       <input
         placeholder="Title"
         value={newMovie.title}
         onChange={(e) => setNewMovie({ ...newMovie, title: e.target.value })}
       />
-      <input
+      {/* <input
         placeholder="Director"
         value={newMovie.director}
         onChange={(e) => setNewMovie({ ...newMovie, director: e.target.value })}
-      />
+      /> */}
       <input
         placeholder="Year"
         value={newMovie.releaseYear}
@@ -85,11 +93,11 @@ function App() {
         value={newMovie.genre}
         onChange={(e) => setNewMovie({ ...newMovie, genre: e.target.value })}
       />
-      <input
+      {/* <input
         placeholder="Rating"
         value={newMovie.rating}
         onChange={(e) => setNewMovie({ ...newMovie, rating: e.target.value })}
-      />
+      /> */}
       <button onClick={addMovie}>Add Movie</button>
 
       <h2>Movie List</h2>
