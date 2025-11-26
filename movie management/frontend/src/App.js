@@ -105,7 +105,7 @@ function App() {
         value={getMovies.movieId}
         onChange={(e) => setID(e.target.value)}
       />
-      <button>getMovies</button>
+      <button onClick={getMovies}>getMovies</button>
 
       <h2>Movie List</h2>
       {movies.map((movie) => (
