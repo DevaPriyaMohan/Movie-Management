@@ -11,6 +11,7 @@ function App() {
     releaseYear: "",
     genre: "",
   });
+  const[ID,setID]=useState(0);
 
  const provider = new BrowserProvider(window.ethereum)
 
@@ -99,6 +100,12 @@ function App() {
         onChange={(e) => setNewMovie({ ...newMovie, rating: e.target.value })}
       /> */}
       <button onClick={addMovie}>Add Movie</button>
+      <input
+        placeholder="Enter movie ID"
+        value={getMovies.movieId}
+        onChange={(e) => setID(e.target.value)}
+      />
+      <button>getMovies</button>
 
       <h2>Movie List</h2>
       {movies.map((movie) => (
