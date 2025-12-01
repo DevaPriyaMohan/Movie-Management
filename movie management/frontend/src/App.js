@@ -12,6 +12,7 @@ function App() {
     genre: "",
   });
   const[ID,setID]=useState(0);
+  const [output,setOutput] = useState('')
 
  const provider = new BrowserProvider(window.ethereum)
 
@@ -25,11 +26,14 @@ function App() {
   const [editMovie, setEditMovie] = useState(null);
 
   const getMovies = async () => {
+    console.log(ID);
+    
    const signer = await provider.getSigner()
     const instance = new Contract(Contract_Address.Contract_Address, abi.abi, signer)
 
-    // const trx = await instance.getMovies(id)
-    // console.log('Transaction Hash:', trx.hash)
+    const trx = await instance.getMovie(ID)
+    console.log('Transaction Details:', trx)
+    setOutput(`Moviename:${trx[0]},ReleaseYear:${trx[1]},Genre:${trx[2]}`)
   };
 
   useEffect(() => {
@@ -106,6 +110,7 @@ function App() {
         onChange={(e) => setID(e.target.value)}
       />
       <button onClick={getMovies}>getMovies</button>
+      <p>{output}</p>
 
       <h2>Movie List</h2>
       {movies.map((movie) => (
